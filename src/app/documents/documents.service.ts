@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Document } from '../shared/model/document.model';
+import { Doc } from './model/document.model';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +7,7 @@ import { Document } from '../shared/model/document.model';
 
 export class DocumentsService {
 
-  documents: Document[] = [
+  documents: Doc[] = [
     {
       title: 'Document 1',
       date: '01.11.21',
@@ -26,11 +26,11 @@ export class DocumentsService {
 
   constructor() { }
 
-  getDocuments(): Document[] {
+  getDocuments(): Doc[] {
     return this.documents;
   }
 
-  getDocument(id: number): Document {
+  getDocument(id: number): Doc {
     return this.documents.find(item => item.id == id);
   }
 
@@ -38,7 +38,7 @@ export class DocumentsService {
 
   }
 
-  addDocument(document: Document): void {
+  addDocument(document: Doc): void {
     this.documents.push(document);
   }
 

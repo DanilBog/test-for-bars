@@ -1,0 +1,18 @@
+<div *ngIf="!currentUser">
+  <label>Login</label>
+  <br>
+  <input type="text" name="login" [(ngModel)]="user.login">
+  <br>
+  <label>Password</label>
+  <br>
+  <input type="password" name="password" [(ngModel)]="user.password">
+  <br>
+  <button (click)="signIn()">SignIn</button>
+  <button (click)="signUp()">SignUp</button>
+  <p *ngIf="error">{{error}}</p>
+</div>
+<div *ngIf="currentUser">
+  <p>Welcome, {{currentUser}}</p>
+  <button (click)="signOut()">SignOut</button>
+</div>
+

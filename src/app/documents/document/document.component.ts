@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { DocumentsService } from '../documents/documents.service';
-import { Document } from '../shared/model/document.model';
+import { Component, Input, OnInit } from '@angular/core';
+import { DocumentsService } from '../documents.service';
+import { Doc } from '../model/document.model';
 
 @Component({
   selector: 'app-document',
@@ -9,7 +9,7 @@ import { Document } from '../shared/model/document.model';
 })
 export class DocumentComponent implements OnInit {
 
-  @Input() document: Document;
+  @Input() document: Doc;
 //  @Output() id = new EventEmitter<number>();
 
   constructor(private documentService: DocumentsService) { }

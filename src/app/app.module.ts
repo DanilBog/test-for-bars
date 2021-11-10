@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { DocumentsModule } from './documents/documents.module';
 import { EditorComponent } from './editor/editor.component';
 import { FormsModule } from '@angular/forms';
+import { AuthComponent } from './auth/auth.component';
 
 
 
@@ -13,6 +14,7 @@ import { FormsModule } from '@angular/forms';
   declarations: [
     AppComponent,
     EditorComponent,
+    AuthComponent,
   ],
   imports: [
     BrowserModule,
