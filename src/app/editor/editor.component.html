@@ -1,0 +1,17 @@
+<div *ngIf="document">
+  <h1>Input new value</h1>
+  <input type="text" name="date" [(ngModel)]="document.date">
+  <br>
+  <input type="text" name="title" [(ngModel)]="document.title">
+  <br>
+  <input type="text" name="note" [(ngModel)]="document.note">
+  <br>
+  <input type="text" name="id" [(ngModel)]="document.id">
+  <br>
+  <input type="text" name="author" [(ngModel)]="document.author">
+  <br>
+  <button *ngIf="id != 0" (click)="edit()">Edit</button>
+  <button *ngIf="id == 0" (click)="add()">Add</button>
+  <br>
+  <a routerLink="/"><button>Back</button></a>
+</div>

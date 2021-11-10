@@ -1,0 +1,10 @@
+<p>List of Documents</p>
+<a routerLink="/edit/0"><button>Add Document</button></a>
+<div class="container">
+  <app-document 
+  *ngFor="let document of documents"
+  [document]="document">
+  </app-document>
+</div>
+
+

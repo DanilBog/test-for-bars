@@ -1,0 +1,8 @@
+<div class="document">
+  <p>ID {{document.id}} / {{document.title}}</p>
+  <p>Date:{{document.date}}</p>
+  <p>Note: {{document.note}}</p>
+  <p>Author: {{document.author}}</p>
+  <a routerLink="/edit/{{document.id}}"><button>Edit</button></a>
+  <button (click)="deleteDocument()">Delete</button>
+</div>
