@@ -13,13 +13,14 @@ import { Doc } from '../documents/model/document.model';
 export class EditorComponent implements OnInit, OnDestroy {
 
   document: Doc = {
-    title: 'Title',
-    date: 'Date',
-    id: 0,
-    note: 'Note',
-    author: 'Author',
+    title: '',
+    date: new Date().toLocaleDateString(),
+    id: null,
+    note: '',
+    author: '',
   };
   id: number;
+  message = '';
   private subscription: Subscription;
   private sub: Subscription;
 
@@ -39,21 +40,38 @@ export class EditorComponent implements OnInit, OnDestroy {
     if (this.id != 0) {
       this.document = this.documentService.getDocument(this.id);
     }
-
   }
 
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }
 
+  update(): void {
+    this.message = '';
+  }
+
   edit(): void {
-    console.log('title', this.document.title);
-    console.log('note', this.document.note);
+    if (this.validate()) {
+    this.message = 'Document has been edit';
+    }
   }
 
   add(): void{
-    this.documentService.addDocument(this.document);
-    this.router.navigate(['/']);
+    if (this.validate()) {
+      this.documentService.addDocument(this.document);
+      this.message = 'Document added';
+    }
+  }
+
+  validate(): boolean {
+    if (  this.document.id == 0 ||
+          this.document.date == '' ||
+          this.document.title == '' ||
+          this.document.note == '') {
+      this.message = 'Fields cannot be empty and Num cannot be 0';
+      return false;
+    }
+    return true;
   }
 
 }

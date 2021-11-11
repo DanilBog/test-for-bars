@@ -1,17 +1,20 @@
 <div *ngIf="document">
   <h1>Input new value</h1>
-  <input type="text" name="date" [(ngModel)]="document.date">
+  <label>Date</label>
+  <input type="text" name="date" [(ngModel)]="document.date" (input)="update()">
   <br>
-  <input type="text" name="title" [(ngModel)]="document.title">
+  <label>Title</label>
+  <input type="text" name="title" [(ngModel)]="document.title" (input)="update()">
   <br>
-  <input type="text" name="note" [(ngModel)]="document.note">
+  <label>Note</label>
+  <input type="text" name="note" [(ngModel)]="document.note" (input)="update()">
   <br>
-  <input type="text" name="id" [(ngModel)]="document.id">
-  <br>
-  <input type="text" name="author" [(ngModel)]="document.author">
+  <label>Num.</label>
+  <input type="text" name="id" [(ngModel)]="document.id" (input)="update()">
   <br>
   <button *ngIf="id != 0" (click)="edit()">Edit</button>
   <button *ngIf="id == 0" (click)="add()">Add</button>
   <br>
   <a routerLink="/"><button>Back</button></a>
+  <p *ngIf="message">{{message}}</p>
 </div>

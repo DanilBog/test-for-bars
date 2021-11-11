@@ -38,8 +38,9 @@ export class DocumentsService {
 
   }
 
-  addDocument(document: Doc): void {
+  addDocument(document: Doc): boolean {
     this.documents.push(document);
+    return true;
   }
 
   deleteDocument(id: number): void {

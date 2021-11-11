@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from './auth.service';
 import { User } from './model/user.model';
@@ -18,7 +19,10 @@ export class AuthComponent implements OnInit, OnDestroy {
   currentUser: string;
   sub: Subscription;
   error: string;
-  constructor(private authService: AuthService) { }
+  constructor(
+    private authService: AuthService,
+    private router: Router)
+  { }
 
   ngOnInit(): void {
     this.sub = this.authService.userName.subscribe(login => this.currentUser = login);
@@ -37,11 +41,16 @@ export class AuthComponent implements OnInit, OnDestroy {
   }
 
   signUp(): void {
+    if (this.user.login.length < 4 || this.user.password.length < 4) {
+      this.error = 'Login and password length must be more than 4 symbols';
+      return;
+    }
     this.authService.signUp(this.user);
   }
 
   signOut(): void {
     this.authService.userName.next('');
+    this.router.navigate(['/']);
   }
 
 

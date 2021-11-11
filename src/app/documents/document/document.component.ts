@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/auth/auth.service';
 import { DocumentsService } from '../documents.service';
 import { Doc } from '../model/document.model';
 
@@ -12,13 +13,15 @@ export class DocumentComponent implements OnInit {
   @Input() document: Doc;
 //  @Output() id = new EventEmitter<number>();
 
-  constructor(private documentService: DocumentsService) { }
+  constructor(private documentService: DocumentsService,
+              private authService: AuthService) { }
 
   ngOnInit(): void {
   }
 
   deleteDocument(): void {
-  //  this.id.emit(this.document.id);
-    this.documentService.deleteDocument(this.document.id);
+    if (this.authService.userName.value == this.document.author) {
+      this.documentService.deleteDocument(this.document.id);
+    }
   }
  }
