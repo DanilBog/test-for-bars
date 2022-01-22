@@ -39,6 +39,8 @@ export class EditorComponent implements OnInit, OnDestroy {
 
     if (this.id != 0) {
       this.document = this.documentService.getDocument(this.id);
+    } else {
+      this.document.id = 1 + this.documentService.getNumberOfDocument();
     }
   }
 
@@ -60,6 +62,9 @@ export class EditorComponent implements OnInit, OnDestroy {
     if (this.validate()) {
       this.documentService.addDocument(this.document);
       this.message = 'Document added';
+      setTimeout(() => {
+        this.router.navigate(['/']);
+      }, 1000);
     }
   }
 

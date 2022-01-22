@@ -1,16 +1,16 @@
 <div *ngIf="document">
   <h1>Input new value</h1>
   <label>Date</label>
-  <input type="text" name="date" [(ngModel)]="document.date" (input)="update()">
+  <input type="text" name="date" [(ngModel)]="document.date">
   <br>
   <label>Title</label>
-  <input type="text" name="title" [(ngModel)]="document.title" (input)="update()">
+  <input type="text" name="title" [(ngModel)]="document.title">
   <br>
   <label>Note</label>
-  <input type="text" name="note" [(ngModel)]="document.note" (input)="update()">
+  <input type="text" name="note" [(ngModel)]="document.note">
   <br>
   <label>Num.</label>
-  <input type="text" name="id" [(ngModel)]="document.id" (input)="update()">
+  <input type="text" name="id" [(ngModel)]="document.id" disabled>
   <br>
   <button *ngIf="id != 0" (click)="edit()">Edit</button>
   <button *ngIf="id == 0" (click)="add()">Add</button>

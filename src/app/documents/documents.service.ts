@@ -34,8 +34,14 @@ export class DocumentsService {
     return this.documents.find(item => item.id == id);
   }
 
-  editDocument(document: Document): void {
-
+  getNumberOfDocument(): number {
+    let maxId = 0;
+    this.documents.forEach((item: Doc) => {
+      if (maxId < item.id) {
+        maxId = item.id;
+      }
+    });
+    return maxId;
   }
 
   addDocument(document: Doc): boolean {
