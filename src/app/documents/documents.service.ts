@@ -1,5 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Doc } from './model/document.model';
+import { Store } from '@ngrx/store';
+import { selectDocumentCollection, selectDocs } from '../state/documents.selectors';
+import {
+  retrievedDocumentList,
+  addDocument,
+  removeDocument,
+} from '../state/documents.action';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -24,10 +32,11 @@ export class DocumentsService {
     },
   ];
 
-  constructor() { }
+  constructor(private store: Store) { }
 
-  getDocuments(): Doc[] {
-    return this.documents;
+  getDocuments(): Observable<readonly Doc[]> {
+    // return this.documents;
+    return this.store.select(selectDocs);
   }
 
   getDocument(id: number): Doc {

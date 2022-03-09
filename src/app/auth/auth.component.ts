@@ -9,6 +9,7 @@ import { User } from './model/user.model';
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.scss']
 })
+
 export class AuthComponent implements OnInit, OnDestroy {
 
   user: User = {

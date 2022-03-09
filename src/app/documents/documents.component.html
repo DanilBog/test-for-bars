@@ -2,7 +2,7 @@
 <a routerLink="/edit/0"><button>Add Document</button></a>
 <div class="container">
   <app-document 
-  *ngFor="let document of documents"
+  *ngFor="let document of documents | async"
   [document]="document">
   </app-document>
 </div>

@@ -7,6 +7,9 @@ import { DocumentsModule } from './documents/documents.module';
 import { EditorComponent } from './editor/editor.component';
 import { FormsModule } from '@angular/forms';
 import { AuthComponent } from './auth/auth.component';
+import { StoreModule } from '@ngrx/store';
+import { documentsReducer } from '../app/state/documents.reducer';
+import { documentReducer } from '../app/state/document.reducer';
 
 
 
@@ -20,7 +23,8 @@ import { AuthComponent } from './auth/auth.component';
     BrowserModule,
     AppRoutingModule,
     DocumentsModule,
-    FormsModule
+    FormsModule,
+    StoreModule.forRoot({ docs: documentsReducer, documents: documentReducer }),
   ],
   providers: [],
   bootstrap: [AppComponent]
