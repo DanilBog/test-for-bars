@@ -1,9 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { DocumentsService } from '../documents/documents.service';
 import { Doc } from '../documents/model/document.model';
+import { selectDoc } from '../state/documents.selectors';
 
 @Component({
   selector: 'app-editor',
@@ -28,7 +30,8 @@ export class EditorComponent implements OnInit, OnDestroy {
     private documentService: DocumentsService,
     private activateRoute: ActivatedRoute,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private store: Store
   )
   {
     this.subscription = activateRoute.params.subscribe(params => this.id = params.id);
@@ -36,9 +39,10 @@ export class EditorComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.sub = this.authService.userName.subscribe(login => this.document.author = login);
-
+    this.documentService.getDocument(this.id).subscribe(doc => console.log('doc', doc));
     if (this.id != 0) {
-      this.document = this.documentService.getDocument(this.id);
+      this.store.select(selectDoc({id: this.id})).subscribe(doc => this.document = doc);
+      //  this.documentService.getDocument(this.id).subscribe(doc => this.document = doc);
     } else {
       this.document.id = 1 + this.documentService.getNumberOfDocument();
     }
@@ -69,10 +73,10 @@ export class EditorComponent implements OnInit, OnDestroy {
   }
 
   validate(): boolean {
-    if (  this.document.id == 0 ||
-          this.document.date == '' ||
-          this.document.title == '' ||
-          this.document.note == '') {
+    if (  this.document.id === 0 ||
+          this.document.date === '' ||
+          this.document.title === '' ||
+          this.document.note === '') {
       this.message = 'Fields cannot be empty and Num cannot be 0';
       return false;
     }

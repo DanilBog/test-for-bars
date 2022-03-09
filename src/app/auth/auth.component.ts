@@ -4,6 +4,9 @@ import { Subscription } from 'rxjs';
 import { AuthService } from './auth.service';
 import { User } from './model/user.model';
 
+import { Store } from '@ngrx/store';
+import { login } from '../state/login.action';
+
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
@@ -22,7 +25,8 @@ export class AuthComponent implements OnInit, OnDestroy {
   error: string;
   constructor(
     private authService: AuthService,
-    private router: Router)
+    private router: Router,
+    private store: Store)
   { }
 
   ngOnInit(): void {
@@ -52,6 +56,11 @@ export class AuthComponent implements OnInit, OnDestroy {
   signOut(): void {
     this.authService.userName.next('');
     this.router.navigate(['/']);
+  }
+
+  // for store
+  onSubmit(username: string, password: string): void {
+    this.store.dispatch(login({ username: username, password: password }));
   }
 
 

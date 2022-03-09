@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Doc } from './model/document.model';
 import { Store } from '@ngrx/store';
-import { selectDocumentCollection, selectDocs } from '../state/documents.selectors';
+import { selectDocument, selectDocs, selectDoc } from '../state/documents.selectors';
 import {
   retrievedDocumentList,
   addDocument,
@@ -39,8 +39,10 @@ export class DocumentsService {
     return this.store.select(selectDocs);
   }
 
-  getDocument(id: number): Doc {
-    return this.documents.find(item => item.id == id);
+  getDocument(id: number): Observable<Doc> {
+    // return this.documents.find(item => item.id === id);
+    // return this.store.select(selectDocument(id));
+    return this.store.select(selectDoc({id}));
   }
 
   getNumberOfDocument(): number {

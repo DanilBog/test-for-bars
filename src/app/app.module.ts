@@ -10,6 +10,7 @@ import { AuthComponent } from './auth/auth.component';
 import { StoreModule } from '@ngrx/store';
 import { documentsReducer } from '../app/state/documents.reducer';
 import { documentReducer } from '../app/state/document.reducer';
+import { loginReducer } from './state/login.reducer';
 
 
 
@@ -24,7 +25,7 @@ import { documentReducer } from '../app/state/document.reducer';
     AppRoutingModule,
     DocumentsModule,
     FormsModule,
-    StoreModule.forRoot({ docs: documentsReducer, documents: documentReducer }),
+    StoreModule.forRoot({ docs: documentsReducer, document: documentReducer, users: loginReducer }),
   ],
   providers: [],
   bootstrap: [AppComponent]
