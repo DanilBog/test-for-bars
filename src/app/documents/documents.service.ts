@@ -55,13 +55,13 @@ export class DocumentsService {
     return maxId;
   }
 
-  addDocument(document: Doc): boolean {
-    this.documents.push(document);
-    return true;
-  }
+  // addDocument(document: Doc): boolean {
+  //   this.documents.push(document);
+  //   return true;
+  // }
 
   deleteDocument(id: number): void {
-    const index = this.documents.findIndex(item => item.id == id);
+    const index = this.documents.findIndex(item => item.id === id);
     this.documents.splice(index, 1);
   }
 }

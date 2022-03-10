@@ -4,7 +4,7 @@ import { Doc } from '../documents/model/document.model';
 
 export const addDocument = createAction(
   '[Document List] Add Document',
-  props<{ docId: number }>()
+  props<{ document: Doc }>()
 );
 
 export const removeDocument = createAction(

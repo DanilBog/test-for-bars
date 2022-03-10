@@ -1,4 +1,4 @@
-import { User } from '../auth/model/user.model';
+import { User } from '../models/user.model';
 import { createSelector, createFeatureSelector } from '@ngrx/store';
 
 export const Users = createFeatureSelector<ReadonlyArray<User>>('users');
@@ -8,5 +8,13 @@ export const selectUsers = createSelector(
   Users,
   (users) => {
     return users;
+  }
+);
+
+export const selectUser = (props: { user: User }) => createSelector(
+  Users,
+  (users) => {
+    // tslint:disable-next-line:triple-equals
+    return users.find(user => user.login === props.user.login && user.password === props.user.password);
   }
 );

@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { DocumentsService } from '../documents/documents.service';
 import { Doc } from '../documents/model/document.model';
+import { addDocument } from '../state/documents.action';
 import { selectDoc } from '../state/documents.selectors';
 
 @Component({
@@ -39,10 +40,8 @@ export class EditorComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.sub = this.authService.userName.subscribe(login => this.document.author = login);
-    this.documentService.getDocument(this.id).subscribe(doc => console.log('doc', doc));
     if (this.id != 0) {
-      this.store.select(selectDoc({id: this.id})).subscribe(doc => this.document = doc);
-      //  this.documentService.getDocument(this.id).subscribe(doc => this.document = doc);
+      this.store.select(selectDoc({id: this.id})).subscribe(doc => {console.log('doc', doc); this.document = doc; });
     } else {
       this.document.id = 1 + this.documentService.getNumberOfDocument();
     }
@@ -64,7 +63,8 @@ export class EditorComponent implements OnInit, OnDestroy {
 
   add(): void{
     if (this.validate()) {
-      this.documentService.addDocument(this.document);
+    //  this.documentService.addDocument(this.document);
+      this.store.dispatch(addDocument({document: this.document}));
       this.message = 'Document added';
       setTimeout(() => {
         this.router.navigate(['/']);

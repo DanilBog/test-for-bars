@@ -1,5 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
-import { User } from '../auth/model/user.model';
+import { User } from '../models/user.model';
+import { login } from './login.action';
 
 export const initialState: ReadonlyArray<User> = [
   {
@@ -13,5 +14,9 @@ export const initialState: ReadonlyArray<User> = [
 ];
 
 export const loginReducer = createReducer(
-  initialState
+  initialState,
+  // on(login, (state, { username, password }) => {
+  //   return state.find(user => user.login === username && user.password === password);
+  //   }
+  // )
 );

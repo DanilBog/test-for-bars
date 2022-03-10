@@ -20,7 +20,8 @@ export const selectDocs = createSelector(
 export const selectDoc = (props: { id: number }) => createSelector(
   Docs,
   (docs): Doc => {
-    return docs.find(doc => doc.id === props.id);
+    // tslint:disable-next-line:triple-equals
+    return docs.find(doc => doc.id == props.id);
   }
 );
 

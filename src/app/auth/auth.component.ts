@@ -2,10 +2,11 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from './auth.service';
-import { User } from './model/user.model';
+import { User } from '../models/user.model';
 
 import { Store } from '@ngrx/store';
 import { login } from '../state/login.action';
+import { selectUser } from '../state/login.selectors';
 
 @Component({
   selector: 'app-auth',
@@ -38,11 +39,20 @@ export class AuthComponent implements OnInit, OnDestroy {
   }
 
   signIn(): void {
-    if (!this.authService.signIn(this.user)) {
-      this.error = 'Login or password incorrect';
-    } else {
-      this.error = '';
-    }
+    // if (!this.authService.signIn(this.user)) {
+    //   this.error = 'Login or password incorrect';
+    // } else {
+    //   this.error = '';
+    // }
+
+    this.store.select(selectUser({user: this.user})).subscribe(user => {
+      if (!user) {
+        this.error = 'Login or password incorrect';
+      } else {
+        this.error = '';
+        this.authService.userName.next(user.login);
+      }
+    });
   }
 
   signUp(): void {

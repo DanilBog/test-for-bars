@@ -20,5 +20,8 @@ export class AppComponent implements OnInit {
     this.store.select(selectDocs).subscribe(item => console.log('selectDocs', item));
     this.store.select(selectUsers).subscribe(users => console.log('selectUsers', users));
     this.store.select(selectDoc({id: 1})).subscribe(doc => console.log('doc', doc));
+    const a = 5;
+    const b = '5';
+    if (a.toString() === b) { console.log('eq'); }
   }
 }

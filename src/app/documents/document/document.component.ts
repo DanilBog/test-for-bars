@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { AuthService } from 'src/app/auth/auth.service';
-import { DocumentsService } from '../documents.service';
+import { removeDocument } from 'src/app/state/documents.action';
 import { Doc } from '../model/document.model';
 
 @Component({
@@ -8,20 +9,17 @@ import { Doc } from '../model/document.model';
   templateUrl: './document.component.html',
   styleUrls: ['./document.component.scss']
 })
-export class DocumentComponent implements OnInit {
+export class DocumentComponent {
 
   @Input() document: Doc;
-//  @Output() id = new EventEmitter<number>();
 
-  constructor(private documentService: DocumentsService,
-              private authService: AuthService) { }
-
-  ngOnInit(): void {
-  }
+  constructor(private authService: AuthService,
+              private store: Store) { }
 
   deleteDocument(): void {
-    if (this.authService.userName.value == this.document.author) {
-      this.documentService.deleteDocument(this.document.id);
+    if (this.authService.userName.value === this.document.author) {
+      this.store.dispatch(removeDocument({docId: this.document.id}));
     }
   }
+
  }

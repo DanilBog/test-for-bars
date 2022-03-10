@@ -18,13 +18,10 @@ export class EditorGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       if (this.authService.userName.value) {
-        if (route.params.id == 0) {
+        if (route.params.id === '0') {
           return true;
         } else {
-          // const document =
-          console.log('route.params.id', route.params.id);
           this.store.select(selectDoc({id: route.params.id})).subscribe(document => {
-            console.log('docum', document);
             if (document.author === this.authService.userName.value) {
               return true;
             }

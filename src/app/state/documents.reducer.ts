@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 
-import { retrievedDocumentList } from './documents.action';
+import { removeDocument, addDocument } from './documents.action';
 import { Doc } from '../documents/model/document.model';
 
 export const initialState: ReadonlyArray<Doc> = [
@@ -22,5 +22,10 @@ export const initialState: ReadonlyArray<Doc> = [
 
 export const documentsReducer = createReducer(
   initialState,
-  on(retrievedDocumentList, (state, { docs }) => docs)
+  on(removeDocument, (state, { docId }) => {
+    return state.filter(doc => doc.id !== docId);
+  }),
+  on(addDocument, (state, { document }) => {
+    return [ ... state, document ];
+  })
 );
