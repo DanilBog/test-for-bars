@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DocumentsService } from './documents.service';
+import { Store } from '@ngrx/store';
+import { selectDocs } from '../state/documents.selectors';
 
 @Component({
   selector: 'app-documents',
@@ -10,10 +11,10 @@ export class DocumentsComponent implements OnInit {
 
   documents: any;
 
-  constructor(private documentService: DocumentsService) { }
+  constructor(private store: Store) { }
 
   ngOnInit(): void {
-    this.documents = this.documentService.getDocuments();
+    this.documents = this.store.select(selectDocs);
   }
 
 }

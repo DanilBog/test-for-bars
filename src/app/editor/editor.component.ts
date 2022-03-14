@@ -3,8 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { AuthService } from '../auth/auth.service';
-import { DocumentsService } from '../documents/documents.service';
 import { Doc } from '../documents/model/document.model';
 import { addDocument, updateDocument } from '../state/documents.action';
 import { getMaxDocId, selectDoc } from '../state/documents.selectors';
@@ -30,10 +28,8 @@ export class EditorComponent implements OnInit, OnDestroy {
   private subStore: Subscription;
 
   constructor(
-    private documentService: DocumentsService,
     private activateRoute: ActivatedRoute,
     private router: Router,
-    private authService: AuthService,
     private store: Store
   )
   {
@@ -41,7 +37,6 @@ export class EditorComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.sub = this.authService.userName.subscribe(login => this.document.author = login);
     if (this.id !== 0) {
       this.subStore = this.store.select(selectDoc({id: this.id})).subscribe(doc => this.document = {... doc} );
     } else {
@@ -56,8 +51,8 @@ export class EditorComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.sub.unsubscribe();
     this.subStore.unsubscribe();
+    this.subscription.unsubscribe();
   }
 
   update(): void {

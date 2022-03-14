@@ -11,6 +11,7 @@ import { StoreModule } from '@ngrx/store';
 import { documentsReducer } from '../app/state/documents.reducer';
 import { documentReducer } from '../app/state/document.reducer';
 import { loginReducer } from './state/login.reducer';
+import { currentUsesReducer } from './state/currentUser.reducer';
 
 
 
@@ -25,7 +26,7 @@ import { loginReducer } from './state/login.reducer';
     AppRoutingModule,
     DocumentsModule,
     FormsModule,
-    StoreModule.forRoot({ docs: documentsReducer, document: documentReducer, users: loginReducer }),
+    StoreModule.forRoot({ docs: documentsReducer, document: documentReducer, users: loginReducer, currentUser: currentUsesReducer }),
   ],
   providers: [],
   bootstrap: [AppComponent]

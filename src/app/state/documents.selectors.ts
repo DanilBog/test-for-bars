@@ -3,12 +3,6 @@ import { Doc } from '../documents/model/document.model';
 
 export const Docs = createFeatureSelector<ReadonlyArray<Doc>>('docs');
 
-export const selectDocumentsState = createFeatureSelector<ReadonlyArray<number>>('documents');
-
-// export const selectDoc = createFeatureSelector<Readonly<Doc>>('doc');
-
-// export const selectFeature = (selectDocs, id: number) => docs.find(item => item.id === id);
-
 /** вернем список документов */
 export const selectDocs = createSelector(
   Docs,
@@ -29,7 +23,7 @@ export const selectDoc = (props: { id: number }) => createSelector(
 /** проверим автора по id */
 export const checkAuthorById = (props: { id: number, author: string }) => createSelector(
   Docs,
-  (docs) => {
+  (docs): boolean => {
     return docs.some(d => d.author === props.author && d.id === props.id);
   }
 );
@@ -49,10 +43,10 @@ export const getMaxDocId = createSelector(
 );
 
 
-export const selectDocument = createSelector(
-  Docs,
-  selectDocumentsState,
-  (docs, documents) => {
-    return documents.map((id) => docs.find((doc) => doc.id === id));
-  }
-);
+// export const selectDocument = createSelector(
+//   Docs,
+//   selectDocumentsState,
+//   (docs, documents) => {
+//     return documents.map((id) => docs.find((doc) => doc.id === id));
+//   }
+// );

@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { User } from '../models/user.model';
-import { login } from './login.action';
+import { signUp } from './login.action';
 
 export const initialState: ReadonlyArray<User> = [
   {
@@ -15,7 +15,7 @@ export const initialState: ReadonlyArray<User> = [
 
 export const loginReducer = createReducer(
   initialState,
-  on(login, (state, { user }) => {
+  on(signUp, (state, { user }) => {
     return [ ...state, user];
     }
   )

@@ -14,7 +14,6 @@ export const selectUsers = createSelector(
 export const selectUser = (props: { user: User }) => createSelector(
   Users,
   (users) => {
-    // tslint:disable-next-line:triple-equals
     return users.find(user => user.login === props.user.login && user.password === props.user.password);
   }
 );

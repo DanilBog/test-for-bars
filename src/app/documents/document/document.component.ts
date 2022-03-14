@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { AuthService } from 'src/app/auth/auth.service';
+import { currentUser } from 'src/app/state/currentUser.selector';
 import { removeDocument } from 'src/app/state/documents.action';
 import { Doc } from '../model/document.model';
 
@@ -13,13 +13,14 @@ export class DocumentComponent {
 
   @Input() document: Doc;
 
-  constructor(private authService: AuthService,
-              private store: Store) { }
+  constructor(private store: Store) { }
 
   deleteDocument(): void {
-    if (this.authService.userName.value === this.document.author) {
-      this.store.dispatch(removeDocument({docId: this.document.id}));
-    }
+    this.store.select(currentUser).subscribe(user => {
+      if (user.login === this.document.author) {
+        this.store.dispatch(removeDocument({docId: this.document.id}));
+      }
+    });
   }
 
  }

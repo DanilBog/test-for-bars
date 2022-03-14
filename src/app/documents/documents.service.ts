@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Doc } from './model/document.model';
 import { Store } from '@ngrx/store';
-import { selectDocument, selectDocs, selectDoc } from '../state/documents.selectors';
+import { selectDocs, selectDoc } from '../state/documents.selectors';
 import {
   retrievedDocumentList,
   addDocument,
@@ -15,28 +15,28 @@ import { Observable } from 'rxjs';
 
 export class DocumentsService {
 
-  documents: Doc[] = [
-    {
-      title: 'Document 1',
-      date: '01.11.21',
-      id: 1,
-      note: ' The first document',
-      author: 'Danil'
-    },
-    {
-      title: 'Document 2',
-      date: '07.11.21',
-      id: 2,
-      note: ' The second document',
-      author: 'Alex'
-    },
-  ];
+  // documents: Doc[] = [
+  //   {
+  //     title: 'Document 1',
+  //     date: '01.11.21',
+  //     id: 1,
+  //     note: ' The first document',
+  //     author: 'Danil'
+  //   },
+  //   {
+  //     title: 'Document 2',
+  //     date: '07.11.21',
+  //     id: 2,
+  //     note: ' The second document',
+  //     author: 'Alex'
+  //   },
+  // ];
 
   constructor(private store: Store) { }
 
-  getDocuments(): Observable<readonly Doc[]> {
-    return this.store.select(selectDocs);
-  }
+  // getDocuments(): Observable<readonly Doc[]> {
+  //   return this.store.select(selectDocs);
+  // }
 
   // getDocument(id: number): Observable<Doc> {
   //   return this.store.select(selectDoc({id}));
