@@ -35,33 +35,25 @@ export class DocumentsService {
   constructor(private store: Store) { }
 
   getDocuments(): Observable<readonly Doc[]> {
-    // return this.documents;
     return this.store.select(selectDocs);
   }
 
-  getDocument(id: number): Observable<Doc> {
-    // return this.documents.find(item => item.id === id);
-    // return this.store.select(selectDocument(id));
-    return this.store.select(selectDoc({id}));
-  }
-
-  getNumberOfDocument(): number {
-    let maxId = 0;
-    this.documents.forEach((item: Doc) => {
-      if (maxId < item.id) {
-        maxId = item.id;
-      }
-    });
-    return maxId;
-  }
-
-  // addDocument(document: Doc): boolean {
-  //   this.documents.push(document);
-  //   return true;
+  // getDocument(id: number): Observable<Doc> {
+  //   return this.store.select(selectDoc({id}));
   // }
 
-  deleteDocument(id: number): void {
-    const index = this.documents.findIndex(item => item.id === id);
-    this.documents.splice(index, 1);
-  }
+  // getNumberOfDocument(): number {
+  //   let maxId = 0;
+  //   this.documents.forEach((item: Doc) => {
+  //     if (maxId < item.id) {
+  //       maxId = item.id;
+  //     }
+  //   });
+  //   return maxId;
+  // }
+
+  // deleteDocument(id: number): void {
+  //   const index = this.documents.findIndex(item => item.id === id);
+  //   this.documents.splice(index, 1);
+  // }
 }

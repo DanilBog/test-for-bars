@@ -60,7 +60,9 @@ export class AuthComponent implements OnInit, OnDestroy {
       this.error = 'Login and password length must be more than 4 symbols';
       return;
     }
-    this.authService.signUp(this.user);
+    // this.authService.signUp(this.user);
+    this.store.dispatch(login({ user: this.user }));
+    this.error = 'You are registred, now SignIn';
   }
 
   signOut(): void {
@@ -69,9 +71,9 @@ export class AuthComponent implements OnInit, OnDestroy {
   }
 
   // for store
-  onSubmit(username: string, password: string): void {
-    this.store.dispatch(login({ username: username, password: password }));
-  }
+  // onSubmit(username: string, password: string): void {
+  //   this.store.dispatch(login({ user: this.user }));
+  // }
 
 
 }

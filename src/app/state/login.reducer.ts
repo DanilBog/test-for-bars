@@ -15,8 +15,8 @@ export const initialState: ReadonlyArray<User> = [
 
 export const loginReducer = createReducer(
   initialState,
-  // on(login, (state, { username, password }) => {
-  //   return state.find(user => user.login === username && user.password === password);
-  //   }
-  // )
+  on(login, (state, { user }) => {
+    return [ ...state, user];
+    }
+  )
 );

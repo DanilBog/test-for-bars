@@ -1,6 +1,6 @@
-import { createReducer, on } from '@ngrx/store';
+import { createReducer, on, Store } from '@ngrx/store';
 
-import { removeDocument, addDocument } from './documents.action';
+import { removeDocument, addDocument, updateDocument } from './documents.action';
 import { Doc } from '../documents/model/document.model';
 
 export const initialState: ReadonlyArray<Doc> = [
@@ -27,5 +27,8 @@ export const documentsReducer = createReducer(
   }),
   on(addDocument, (state, { document }) => {
     return [ ... state, document ];
+  }),
+  on(updateDocument, (state, {document}) => {
+    return state.map(doc => doc.id === document.id ? document : doc);
   })
 );

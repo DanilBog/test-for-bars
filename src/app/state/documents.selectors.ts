@@ -17,6 +17,7 @@ export const selectDocs = createSelector(
   }
 );
 
+/** вернем документ */
 export const selectDoc = (props: { id: number }) => createSelector(
   Docs,
   (docs): Doc => {
@@ -24,6 +25,29 @@ export const selectDoc = (props: { id: number }) => createSelector(
     return docs.find(doc => doc.id == props.id);
   }
 );
+
+/** проверим автора по id */
+export const checkAuthorById = (props: { id: number, author: string }) => createSelector(
+  Docs,
+  (docs) => {
+    return docs.some(d => d.author === props.author && d.id === props.id);
+  }
+);
+
+/** вернем максимальный id */
+export const getMaxDocId = createSelector(
+  Docs,
+  (docs): number => {
+    let maxId = 0;
+    docs.forEach((item: Doc) => {
+      if (maxId < item.id) {
+        maxId = item.id;
+      }
+    });
+    return maxId;
+  }
+);
+
 
 export const selectDocument = createSelector(
   Docs,

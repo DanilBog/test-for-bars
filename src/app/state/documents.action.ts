@@ -12,6 +12,11 @@ export const removeDocument = createAction(
   props<{ docId: number }>()
 );
 
+export const updateDocument = createAction(
+  '[Document Collection] Update Document',
+  props<{ document: Doc }>()
+);
+
 export const retrievedDocumentList = createAction(
   '[Document List/API] Retrieve Documents Success',
   props<{ docs: ReadonlyArray<Doc> }>()
